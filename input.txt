@@ -7,3 +7,4 @@ Trip Dan 06:12 06:32 21.8
 Trip Lauren 12:01 13:16 42.0
 Trip Kumi 12:00 20:00 10.0
 Trip Kumi 1:00 1:05 0.4
+Trip Steve 1:00 1:30 10

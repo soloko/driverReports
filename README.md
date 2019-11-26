@@ -4,33 +4,24 @@ _Clean code is key_
 
 Track driver history with `Node.js` / `JavaScript`.
 
-Follow along with the boilerplate workshop to make your own! This canonical
-version can serve as a reference, or a starting point. For an in depth
-discussion into the code that makes up this repository, see the
-[Boilermaker Guided Tour][process-node]
+I haven't had much practice with processing files, so I don't know which way is preferred in Node. This works, but may not be best practice. Here's the docs on Node's
+[File System - readFileSync][node-fs]
 
-[process-node]: https://nodejs.org/api/process.html#process_process_stdin
+[node-fs]: https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options
 
-## Setup
+## Running the program
 
-To use this as boilerplate, you'll need to take the following steps:
-
-* Don't fork or clone this repo! Instead, create a new, empty
-  directory on your machine and `git init` (or create an empty repo on
-  Github and clone it to your local machine)
-* Run the following commands:
-
+Use this in the command line with the command:
 ```
-git remote add boilermaker https://github.com/FullstackAcademy/boilermaker.git
-git fetch boilermaker
-git merge boilermaker/master
+node main './path/to/your/file'
 ```
 
-Why did we do that? Because every once in a while, `boilermaker` may
-be updated with additional features or bug fixes, and you can easily
-get those changes from now on by entering:
+## Reasoning
+Initially, I had the code in one function, but read that it should not be confined to just one. I moved some utility functions outside of the bulk of code. These functions could possibly be used again as the application grows.
 
-```
-git fetch boilermaker
-git merge boilermaker/master
-```
+I made sure this worked with edge cases in my input file, but didn't write a whole test suite. Tests can be written in Mocha, but I thought could be expanded on later.
+
+The main functionality lives in `generateDriverHistory()`. As it iterates through each line, it removes the command and the driver from the line and stores them in separate variables. I built this program with the ability to grow with commands.
+
+There are many conditionals set up throughout. There are also error cases that may be handled in the future. Right now, the output is in the console and the original file remains the same.
+

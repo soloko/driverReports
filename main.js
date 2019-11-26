@@ -1,5 +1,6 @@
 const fs = require('fs')
-const data = fs.readFileSync('./input', 'utf8')
+const fileName = process.argv[2]
+const data = fs.readFileSync(fileName, 'utf8')
 
 function mph (miles, hours, minutes) {
   if (minutes){
@@ -36,7 +37,7 @@ function generateDriverHistory (file) {
 
   inputArr.forEach(line => {
     line = line.split(' ')
-    let command = line.shift()
+    const command = line.shift()
     const driver = line.shift()
     switch (command){
       case 'Driver':
@@ -46,22 +47,23 @@ function generateDriverHistory (file) {
             totalMinutes: 0
           }
         } else {
-          // How do we want to handle duplicated drivers?
+          // NOTE: How do we want to handle duplicated drivers?
         }
         break
       case 'Trip':
         const {minutes, miles} = tripParser(line)
+        // NOTE: How do we handle trips with no driver command
+        if (!driverData[driver]) break
         if (mph(miles, null, minutes) > 5 && mph(miles, null, minutes) < 100){
           driverData[driver].totalMiles += miles
           driverData[driver].totalMinutes += minutes
         }
         break
       default:
-        // How do we want to handle unexpected commands?
+        // NOTE: How do we want to handle unexpected commands?
     }
   })
   return condenseDriverData(driverData)
 }
 
 console.log(generateDriverHistory(data))
-
